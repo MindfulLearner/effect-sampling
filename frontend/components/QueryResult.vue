@@ -1,4 +1,18 @@
+<script setup lang="ts" generic="E extends SupportedErrors, A">
+import type { SupportedErrors } from "effect-app/client/errors"
+import { Cause, Either, Match, Option } from "effect-app"
+import Delayed from "./Delayed.vue"
+import { Result } from "~/composables/client"
+
+defineProps<{ result: Result.Result<A, E> }>()
+const config = useRuntimeConfig()
+
+const getLatest = (result: Result.Result<A, E>): A | null =>
+  Option.getOrNull(Result.value(result))
+</script>
+
 <template>
+  {{ getLatest }}
   <template v-if="result._tag !== 'Initial'">
     <slot
       v-if="getLatest(result)"
@@ -43,15 +57,3 @@
   </template>
   <Delayed v-else><v-progress-circular /></Delayed>
 </template>
-<script setup lang="ts" generic="E extends SupportedErrors, A">
-import type { SupportedErrors } from "effect-app/client/errors"
-import { Cause, Either, Match, Option } from "effect-app"
-import Delayed from "./Delayed.vue"
-import { Result } from "~/composables/client"
-
-defineProps<{ result: Result.Result<A, E> }>()
-const config = useRuntimeConfig()
-
-const getLatest = (result: Result.Result<A, E>): A | null =>
-  Option.getOrNull(Result.value(result))
-</script>
