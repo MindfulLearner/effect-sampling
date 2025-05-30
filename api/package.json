@@ -1,0 +1,194 @@
+{
+  "name": "@effect-app-boilerplate/api",
+  "version": "0.0.1",
+  "main": "./dist/main.js",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "circular": "pnpm circular:src && pnpm circular:dist",
+    "circular:src": "madge --circular --ts-config ./tsconfig.json --extensions ts ./src",
+    "circular:dist": "madge --circular --extensions js ./dist",
+    "clean": "rm -rf dist test/dist",
+    "clean-dist": "sh ../scripts/clean-dist.sh",
+    "build": "pnpm clean-dist && NODE_OPTIONS=--max-old-space-size=8192 tsc --build",
+    "watch": "pnpm build --watch",
+    "watch2": "pnpm clean-dist && NODE_OPTIONS=--max-old-space-size=8192 tsc -w",
+    "compile": "NODE_OPTIONS=--max-old-space-size=8192 tsc --noEmit",
+    "lint": "NODE_OPTIONS=--max-old-space-size=8192 ESLINT_TS=1 eslint src test",
+    "lint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx src test",
+    "autofix": "pnpm lint --fix",
+    "test": "vitest",
+    "test:run": "pnpm run test run --passWithNoTests",
+    "testsuite": "pnpm circular && pnpm run test:run && pnpm lint",
+    "dev": "NODE_ENV=development nodemon --signal SIGTERM --exec pnpm dev:tsx",
+    "dev:compiled": "pnpm start:compiled",
+    "dev:tsx": "pnpm start:tsx",
+    "dev:vite": "vite-node --watch ./src/main.ts",
+    "start": "pnpm start:compiled",
+    "debug": "tsx ./src/main.ts --inspect",
+    "start:compiled": "node -r source-map-support/register ./dist/main.js",
+    "start:tsx": "tsx ./src/main.ts",
+    "ncu": "ncu",
+    "extract:i18n": "formatjs extract './**/*.ts' --ignore './**/*.d.ts' --format src/i18n/extraction-formatter.cjs --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file src/i18n/extracted/en.json"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./_cjs/index.cjs"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.js"
+      },
+      "require": {
+        "types": "./dist/*.d.ts",
+        "default": "./_cjs/*.cjs"
+      }
+    }
+  },
+  "imports": {
+    "#api": {
+      "import": {
+        "types": "./dist/api.d.ts",
+        "default": "./dist/api.js"
+      },
+      "require": {
+        "types": "./dist/api.d.ts",
+        "default": "./_cjs/api.cjs"
+      }
+    },
+    "#config": {
+      "import": {
+        "types": "./dist/config.d.ts",
+        "default": "./dist/config.js"
+      },
+      "require": {
+        "types": "./dist/config.d.ts",
+        "default": "./_cjs/config.cjs"
+      }
+    },
+    "#lib/*": {
+      "import": {
+        "types": "./dist/lib/*.d.ts",
+        "default": "./dist/lib/*.js"
+      },
+      "require": {
+        "types": "./dist/lib/*.d.ts",
+        "default": "./_cjs/lib/*.cjs"
+      }
+    },
+    "#core/*": {
+      "import": {
+        "types": "./dist/core/*.d.ts",
+        "default": "./dist/core/*.js"
+      },
+      "require": {
+        "types": "./dist/core/*.d.ts",
+        "default": "./_cjs/core/*.cjs"
+      }
+    },
+    "#models": {
+      "import": {
+        "types": "./dist/models.d.ts",
+        "default": "./dist/models.js"
+      },
+      "require": {
+        "types": "./dist/models.d.ts",
+        "default": "./_cjs/models.cjs"
+      }
+    },
+    "#resources": {
+      "import": {
+        "types": "./dist/resources.d.ts",
+        "default": "./dist/resources.js"
+      },
+      "require": {
+        "types": "./dist/resources.d.ts",
+        "default": "./_cjs/resources.cjs"
+      }
+    },
+    "#models/*": {
+      "import": {
+        "types": "./dist/models/*.d.ts",
+        "default": "./dist/models/*.js"
+      },
+      "require": {
+        "types": "./dist/models/*.d.ts",
+        "default": "./_cjs/models/*.cjs"
+      }
+    },
+    "#resources/*": {
+      "import": {
+        "types": "./dist/resources/*.d.ts",
+        "default": "./dist/resources/*.js"
+      },
+      "require": {
+        "types": "./dist/resources/*.d.ts",
+        "default": "./_cjs/resources/*.cjs"
+      }
+    }
+  },
+  "dependencies": {
+    "@azure/arm-monitor": "^7.0.0",
+    "@azure/cosmos": "^4.3.0",
+    "@azure/service-bus": "^7.9.5",
+    "@azure/storage-blob": "^12.27.0",
+    "@effect-app/infra": "2.55.1",
+    "effect-app": "^2.40.1",
+    "@effect/platform": "^0.80.20",
+    "@effect/opentelemetry": "^0.46.17",
+    "@effect/platform-node": "0.77.10",
+    "@effect/rpc": "^0.56.8",
+    "@effect/rpc-http": "^0.52.4",
+    "@effect/vitest": "^0.21.3",
+    "@formatjs/cli": "^6.7.1",
+    "@formatjs/intl": "3.1.6",
+    "@mollie/api-client": "^4.3.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.58.1",
+    "@opentelemetry/context-async-hooks": "^2.0.0",
+    "@opentelemetry/sdk-node": "^0.200.0",
+    "@sendgrid/mail": "^8.1.5",
+    "@sentry/node": "9.14.0",
+    "@sentry/opentelemetry": "9.14.0",
+    "connect": "^3.7.0",
+    "cors": "^2.8.5",
+    "cross-fetch": "^4.1.0",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.5.0",
+    "effect": "^3.14.20",
+    "express": "^5.1.0",
+    "express-compression": "^1.0.2",
+    "express-oauth2-jwt-bearer": "^1.6.1",
+    "fast-check": "^4.1.1",
+    "jwks-rsa": "2.1.4",
+    "jwt-decode": "^4.0.0",
+    "object-hash": "^3.0.0",
+    "papaparse": "^5.5.2",
+    "redis": "^3.1.2",
+    "redlock": "^5.0.0-beta.2",
+    "redoc": "^2.5.0",
+    "redoc-express": "^2.1.0",
+    "source-map-support": "^0.5.21",
+    "stopwatch-node": "^1.1.0",
+    "swagger-ui-express": "^5.0.1",
+    "tcp-port-used": "^1.0.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/redis": "^2.8.32",
+    "@types/swagger-ui-express": "^4.1.8",
+    "eslint-plugin-formatjs": "^5.3.1",
+    "typescript": "~5.8.3"
+  }
+}

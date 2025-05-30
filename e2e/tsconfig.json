@@ -1,0 +1,41 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./test-out",
+    "lib": [
+      "es5",
+      "dom"
+    ],
+    "paths": {
+      "e2e/*": [
+        "./*"
+      ]
+    },
+    // helps performance
+    "disableSourceOfProjectReferenceRedirect": true,
+    // "transformers": [
+    //   // Transform paths in output .js files
+    //   {
+    //     "name": "ts-transform-paths"
+    //   },
+    //   // Transform paths in output .d.ts files (Include this line if you output declarations files)
+    //   {
+    //     "name": "ts-transform-paths",
+    //     "position": "afterDeclaration"
+    //   }
+    // ]
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "./test-out"
+  ],
+  "references": [
+    {
+      "path": "../api"
+    }
+  ]
+}
