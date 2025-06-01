@@ -1,8 +1,17 @@
 import { S } from "./lib.js"
-import { nonPositiveBigInt } from "./lib/schema.js"
 
 class Response extends S.Class<Response>()({
-  title: S.nonEmptyString,
-  price: S.NullOr(nonPositiveBigInt),
-  categoties: S.Struct()
+  title: S.String,
+  product: S.Struct({
+    name: S.String,
+    price: S.NullOr(S.String)
+  })
 }) {}
+
+export class GetCoolItems extends S.Req<GetCoolItems>()("GetCoolItems", {
+  echo: S.String
+}, { allowAnonymous: true, allowRoles: ["user"], success: Response }) {}
+
+// codegen:start {preset: meta, sourcePrefix: src/resources/}
+export const meta = { moduleName: "CoolItems" } as const
+// codegen:end

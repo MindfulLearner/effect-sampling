@@ -12,7 +12,7 @@ const getLatest = (result: Result.Result<A, E>): A | null =>
 </script>
 
 <template>
-  {{ getLatest }}
+  hello query
   <template v-if="result._tag !== 'Initial'">
     <slot
       v-if="getLatest(result)"
