@@ -20,7 +20,8 @@ env:
   NAMESPACE: ${{ inputs.namespace }}
   BUILD_ONLY: ${{ inputs.build-only }}
 
-## to adjust cache busters
+## dockerize by inputs
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,10 +29,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22.14.0
           cache: "npm"
-      - name: Install Dependencies
-        run: npm install
+      - name: Install pnpm
+        run: pnpm-install
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
@@ -42,5 +43,3 @@ jobs:
       - name: Push
         run: |
           echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
-
-## dockerize by inputs
