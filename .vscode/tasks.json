@@ -297,7 +297,20 @@
 				"group": "run",
 				"reveal": "never"
 			},
-			"problemMatcher":[]
+			"problemMatcher": []
+		},
+		{
+			"label": "Clean Data",
+			"type": "shell",
+			"command": "sh scripts/clean-data.sh",
+			"options": {
+				"cwd": "${workspaceRoot}"
+			},
+			"group": "build",
+			"presentation": {
+				"clear": true,
+				"reveal": "never"
+			}
 		}
 	]
 }
