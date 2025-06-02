@@ -22,20 +22,22 @@ env:
 
 ## dockerize by inputs
 
+## build api
 jobs:
-  build:
+  build_api:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Setup Node
+      - name: "Checkout Github Action"
         uses: actions/setup-node@v4
+      - name: restore api-dist
+        uses: actions/cache@v4
         with:
-          node-version: 22.14.0
-          cache: "npm"
-      - name: Install pnpm
-        run: pnpm-install
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Build
+          path: api/dist
+          key: ${{ env.IMAGE_ID }}-api-dist-${{ github.sha }}
+          restore-keys: |
+            ${{ env.IMAGE_ID }}-api-dist-
+      - name: "build api"
         run: |
           echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
           echo "NAMESPACE: ${{ env.NAMESPACE }}"
