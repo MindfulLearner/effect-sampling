@@ -1,0 +1,47 @@
+on:
+  workflow_call: 
+    inputs:
+        build-only:
+            required: false
+            default: false
+            type: boolean
+        image-id:
+            required: false
+            type: string
+            default: "main-latest"
+        namespace:
+            required: true
+            default: main
+            type: string
+
+name: _Build
+env:
+  IMAGE_ID: ${{ inputs.image-id }}
+  NAMESPACE: ${{ inputs.namespace }}
+  BUILD_ONLY: ${{ inputs.build-only }}
+
+## dockerize by inputs
+
+## build api
+jobs:
+  build_api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout Github Action"
+        uses: actions/setup-node@v4
+      - name: restore api-dist
+        uses: actions/cache@v4
+        with:
+          path: api/dist
+          key: ${{ env.IMAGE_ID }}-api-dist-${{ github.sha }}
+          restore-keys: |
+            ${{ env.IMAGE_ID }}-api-dist-
+      - name: "build api"
+        run: |
+          echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
+          echo "NAMESPACE: ${{ env.NAMESPACE }}"
+          echo "BUILD_ONLY: ${{ env.BUILD_ONLY }}"
+      - name: Push
+        run: |
+          echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
