@@ -8,6 +8,7 @@ class Response extends S.Class<Response>()({
   })
 }) {}
 
+// test
 export class GetCoolItems extends S.Req<GetCoolItems>()("GetCoolItems", {
   echo: S.String
 }, { allowAnonymous: true, allowRoles: ["user"], success: Response }) {}
