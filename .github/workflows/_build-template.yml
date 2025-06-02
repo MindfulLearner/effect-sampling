@@ -1,0 +1,14 @@
+on:
+  workflow_call: 
+    inputs:
+        build-only:
+            required: true
+            type: boolean
+            default: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: node --version
+      - run: npm --version
