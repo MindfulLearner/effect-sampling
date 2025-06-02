@@ -2,13 +2,45 @@ on:
   workflow_call: 
     inputs:
         build-only:
-            required: true
-            type: boolean
+            required: false
             default: false
+            type: boolean
+        image-id:
+            required: false
+            type: string
+            default: "main-latest"
+        namespace:
+            required: true
+            default: main
+            type: string
 
+name: _Build
+env:
+  IMAGE_ID: ${{ inputs.image-id }}
+  NAMESPACE: ${{ inputs.namespace }}
+  BUILD_ONLY: ${{ inputs.build-only }}
+
+## to adjust cache busters
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: node --version
-      - run: npm --version
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install Dependencies
+        run: npm install
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build
+        run: |
+          echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
+          echo "NAMESPACE: ${{ env.NAMESPACE }}"
+          echo "BUILD_ONLY: ${{ env.BUILD_ONLY }}"
+      - name: Push
+        run: |
+          echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
+
+## dockerize by inputs
