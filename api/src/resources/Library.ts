@@ -8,18 +8,6 @@ export class CreateBook extends S.Req<CreateBook>()("CreateBook", BookInfo.pick(
   failure: S.Union(NotFoundError, InvalidStateError, OptimisticConcurrencyException)
 }) {}
 
-class Response extends S.Class<Response>()({
-  title: S.String,
-  product: S.Struct({
-    name: S.String,
-    price: S.NullOr(S.String)
-  })
-}) {}
-
-export class GetLibrary extends S.Req<GetLibrary>()("GetLibrary", {
-  echo: S.String
-}, { allowAnonymous: true, allowRoles: ["user"], success: Response }) {}
-
 // codegen:start {preset: meta, sourcePrefix: src/resources/}
 export const meta = { moduleName: "Library" } as const
 // codegen:end
