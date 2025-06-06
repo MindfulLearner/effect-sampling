@@ -47,6 +47,7 @@ onMounted(() => {
 </script>
 
 <template>
+  {{ result }}
   <div>
     Hi world!
     <v-form @submit.prevent="form.submit">
