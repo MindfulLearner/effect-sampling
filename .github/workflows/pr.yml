@@ -26,6 +26,6 @@ jobs:
       packages: write
     with:
       build-only: true
-      namespace: main
-      image-id: pr-${{ github.event.pull_request.number }}
+      namespace: "pr"
+      image-id: "pr-${{ github.event.pull_request.number }}"
     secrets: inherit
