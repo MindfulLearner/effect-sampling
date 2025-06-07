@@ -40,6 +40,7 @@ jobs:
             ${{ env.IMAGE_ID }}-api-dist-
       - name: "build api"
         run: |
+          pnpm build
           echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
           echo "NAMESPACE: ${{ env.NAMESPACE }}"
           echo "BUILD_ONLY: ${{ env.BUILD_ONLY }}"
