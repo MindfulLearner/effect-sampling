@@ -78,7 +78,7 @@ jobs:
 
       - name: "build api"
         run: |
-          pnpm build
+          pnpm api build
 
       - name: Push
         run: |
