@@ -14,11 +14,15 @@ on:
             default: main
             type: string
 
-name: _Build
+name: _build
 env:
   IMAGE_ID: ${{ inputs.image-id }}
   NAMESPACE: ${{ inputs.namespace }}
   BUILD_ONLY: ${{ inputs.build-only }}
+
+  TEST_USE_FULL_DIST: true
+
+  BUILD_ONLY_PR: ${{ inputs.build-only }}
 
 ## dockerize by inputs
 

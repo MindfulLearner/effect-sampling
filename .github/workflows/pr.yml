@@ -21,9 +21,6 @@ jobs:
     if: ${{ github.event.pull_request.draft == false }}
     name: Build
     uses: ./.github/workflows/_build-template.yml
-    permissions:
-      contents: read
-      packages: write
     with:
       build-only: true
       namespace: "pr"
