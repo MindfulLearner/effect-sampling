@@ -39,7 +39,7 @@ jobs:
     # adding build
     steps:
       - name: "Checkout Github Action"
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v4
 
       - name: restore api-dist
         uses: actions/cache@v4
