@@ -27,6 +27,7 @@ jobs:
   build_api:
     runs-on: ubuntu-latest
 
+    # adding build
     steps:
       - name: "Checkout Github Action"
         uses: actions/setup-node@v4
