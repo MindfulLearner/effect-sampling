@@ -64,6 +64,12 @@ jobs:
           version: 10
           run_install: false
 
+      # needed for perf 
+      - name: Get pnpm store directory
+        id: pnpm-store
+        run: |
+          echo "::set-output name=pnpm_store::$(pnpm store path)"
+
       - name: "install packages"
         run: |
           pnpm install
@@ -72,9 +78,8 @@ jobs:
 
       - name: "build api"
         run: |
-          echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
-          echo "NAMESPACE: ${{ env.NAMESPACE }}"
-          echo "BUILD_ONLY: ${{ env.BUILD_ONLY }}"
+          pnpm build
+
       - name: Push
         run: |
           echo "IMAGE_ID: ${{ env.IMAGE_ID }}"
