@@ -4,7 +4,7 @@ import { UserFromIdResolver } from "#models/User"
 import { Model } from "@effect-app/infra"
 import { Effect } from "effect"
 import { Context } from "effect-app"
-import { NonEmptyString255, NonEmptyString2k, NonNegativeBigInt } from "effect-app/Schema"
+import { NonEmptyString255, NonEmptyString2k } from "effect-app/Schema"
 import { UserRepo } from "./UserRepo.js"
 
 export type BookInfoSeed = "sample" | ""
@@ -29,7 +29,7 @@ export class BookInfoRepo extends Effect.Service<BookInfoRepo>()("BookInfoRepo",
                     title: NonEmptyString255("Test post " + i),
                     body: NonEmptyString2k("imma test body"),
                     author: user,
-                    price: NonNegativeBigInt(100)
+                    description: NonEmptyString2k("SWAG")
                   }, true)
                 )
             )

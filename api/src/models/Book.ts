@@ -1,5 +1,4 @@
 import { S } from "effect-app"
-import { NonNegativeBigInt } from "effect/Schema"
 import { UserFromId } from "./User.js"
 
 export const BookInfoId = S.prefixedStringId<BlogPostId>()("info", "BookInfoId")
@@ -13,9 +12,9 @@ export class BookInfo extends S.ExtendedClass<BookInfo, BookInfo.Encoded>()({
   id: BookInfoId.withDefault,
   title: S.NonEmptyString255,
   body: S.NonEmptyString2k,
+  description: S.NonEmptyString2k,
   createdAt: S.Date.withDefault,
-  author: S.propertySignature(UserFromId).pipe(S.fromKey("authorId")),
-  price: S.NullOr(NonNegativeBigInt)
+  author: S.propertySignature(UserFromId).pipe(S.fromKey("authorId"))
 }) {}
 
 // codegen:start {preset: model}
