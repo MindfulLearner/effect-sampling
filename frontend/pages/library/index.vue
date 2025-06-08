@@ -16,6 +16,7 @@ const [, createBook] = useSafeMutation(libraryClient.CreateBook)
           createBook({
             title: S.NonEmptyString255(new Date().toString()),
             body: S.NonEmptyString2k('SWAG'),
+            price: S.NonNegativeBigInt(100),
           }),
         )
       "
