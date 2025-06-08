@@ -12,7 +12,6 @@ export class BookInfo extends S.ExtendedClass<BookInfo, BookInfo.Encoded>()({
   id: BookInfoId.withDefault,
   title: S.NonEmptyString255,
   body: S.NonEmptyString2k,
-  description: S.NonEmptyString2k,
   createdAt: S.Date.withDefault,
   author: S.propertySignature(UserFromId).pipe(S.fromKey("authorId"))
 }) {}
