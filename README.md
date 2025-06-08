@@ -1,5 +1,8 @@
 # @effect-app-boilerplate
 
+![image](https://github.com/user-attachments/assets/4d36ff91-3f29-4c50-af7e-ff592ceaeca9)
+
+
 ## 🛠️ Setup
 
 1. Installa le dipendenze dalla root del progetto:
