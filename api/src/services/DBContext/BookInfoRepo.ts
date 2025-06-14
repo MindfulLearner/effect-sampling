@@ -26,8 +26,8 @@ export class BookInfoRepo extends Effect.Service<BookInfoRepo>()("BookInfoRepo",
                 .flatMap((_) => [_, _])
                 .map((user, i) =>
                   new BookInfo({
-                    title: NonEmptyString255("Test post " + i),
-                    body: NonEmptyString2k("imma test body"),
+                    title: NonEmptyString255("Test postss " + i),
+                    body: NonEmptyString2k("imma test bodssy"),
                     author: user
                   }, true)
                 )
